@@ -39,7 +39,7 @@ CREATE TABLE `organisations` (
 --
 
 INSERT INTO `organisations` (`ID`, `name`, `email`) VALUES
-(1, 'Administrate', 'admnstr@something.com'),
+(1, 'Bloomberg', 'blbrg@bloomberg.net'),
 (2, 'Google', 'ggl@gmail.com'),
 (3, 'Amazon', 'amazon@gmail.com'),
 (4, 'AMD', 'amd@amd.com'),
@@ -65,14 +65,14 @@ CREATE TABLE `people` (
 
 INSERT INTO `people` (`ID`, `name`, `phone`, `organisation`, `organisationid`) VALUES
 (2, 'Lamar Wolfe', '012449420', 'AMD', 4),
-(3, 'Fadel Gaber', '07384376593', 'Administrate', 1),
+(3, 'Fadel Gaber', '07555188', 'Heaven', 1),
 (4, 'Brian Mcpherson', '055 3322 4467', 'Google', 2),
 (5, 'Drew Conner', '0801 652 2441', 'Amazon', 3),
 (6, 'Austin Dickerson', '055 4990 9805', 'Intel', 5),
 (7, 'Camden Mason', '07995 803810', 'Intel', 5),
-(8, 'Ivor Goff', '055 3921 9696', 'Administrate', 1),
-(9, 'Gannon Jacobson', '(01953) 71229', 'Administrate', 1),
-(12, 'Connor Sharpe', '123456878', 'Administrate', 1),
+(8, 'Ivor Goff', '055 3921 9696', 'Bloomberg', 1),
+(9, 'Gannon Jacobson', '(01953) 71229', 'Bloomberg', 1),
+(12, 'Connor Sharpe', '123456878', 'Bloomberg', 1),
 (16, 'Jeremy Jones', '213321321', 'Amazon', 3);
 
 --

@@ -6,16 +6,23 @@ class RouteServiceProvider{
     {
         $url = $this->parseUrl();
         
-        if(isSet($url[0])){
-            $controller = $this->loadController($url);
+        if(empty($url[0])){
+            $url[0]='index';
+            $url[1]='view';
         }
+
+        if(empty($url[1])){
+            $url[1]='view';
+        }
+        
+        $controller = $this->loadController($url);
         
         if(isSet($url[1])){
             $this->loadControllerFunction($url, $controller);
         } 
     }
 
-    private  function parseUrl(){
+    private function parseUrl(){
         $url = $_GET['url'];
         $url = rtrim($url,'/');
         $url = explode('/', $url);
@@ -32,7 +39,7 @@ class RouteServiceProvider{
             $controller = new $route_breakdown['controller_class'];
         }
         else{
-            echo $route_breakdown['controller_file'];
+            echo "it is $url[0]";
             throw new Exception('The file does not exist');
         }
 

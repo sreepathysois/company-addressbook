@@ -1,12 +1,7 @@
 <?php
-    class BaseView{
-        
-        // function __construct()
-        // {
-        //     echo 'view reached';
-        // }
+class BaseView{
 
-        public function render($name){
-            require 'views/' .$name. '.php';
-        }
+    public function render($name){
+        require 'views/' .$name. '.php';
     }
+}

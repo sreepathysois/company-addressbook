@@ -1,5 +1,10 @@
 <?php
 include('conn.php');
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo 'You are authorized';
+}
+
 $name   = $_POST['name'];
 $phone  = $_POST['phone'];
 $org    = $_POST['org'];

@@ -43,7 +43,7 @@ foreach ($result as $row) {
       <th>Add new </th>
    </tr>
    <tr>
-      <form method="POST" action="addpeople.php">
+      <form method="GET" action="/people/test/test">
          <td><label>Name:</label><input type="text" name="name" required></td>
    </tr>
    <tr>

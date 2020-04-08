@@ -1,25 +1,30 @@
 <?php
+require_once 'routing/RouteHandler.php';
 
 class RouteServiceProvider{
 
     function __construct()
     {
         $url = $this->parseUrl();
-        
-        if(empty($url[0])){
-            $url[0]='index';
-            $url[1]='view';
-        }
+        $routeHandler = new RouteHandler();
+        $routeHandler->handle($_REQUEST);
+        // if(empty($url[0])){
+        //     $url[0]='index';
+        //     $url[1]='view';
+        // }
 
-        if(empty($url[1])){
-            $url[1]='view';
-        }
+        // if(empty($url[1])){
+        //     $url[1]='view';
+        // }
+        // if($_SERVER['REQUEST_METHOD'] === 'GET') {
+        //     echo 'gettest';
+        //     print_r($_REQUEST);
+        // }
+        // $controller = $this->loadController($url);
         
-        $controller = $this->loadController($url);
-        
-        if(isSet($url[1])){
-            $this->loadControllerFunction($url, $controller);
-        } 
+        // if(isSet($url[1])){
+        //     $this->loadControllerFunction($url, $controller);
+        // } 
     }
 
     private function parseUrl(){
@@ -30,27 +35,6 @@ class RouteServiceProvider{
         return $url;
     }
 
-    private function loadController(Array $url){
-        $route_breakdown['controller_file'] = ucFirst($url[0]).'Controller.php';
-        $route_breakdown['controller_class'] = ucFirst($url[0]).'Controller';
-        
-        if(file_exists('controllers/'.$route_breakdown['controller_file'])){
-            require 'controllers/'.$route_breakdown['controller_file'];
-            $controller = new $route_breakdown['controller_class'];
-        }
-        else{
-            echo "it is $url[0]";
-            throw new Exception('The file does not exist');
-        }
-
-        return $controller;
-    }
-
-    private function loadControllerFunction(Array $url, $controller){
-        $route_breakdown['controller_function'] = $url[1];
-        $route_breakdown['argument'] = $url[2];
     
-        $controller->{$route_breakdown['controller_function']}($route_breakdown['argument']);
-    }
     
 }

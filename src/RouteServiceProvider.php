@@ -5,9 +5,10 @@ class RouteServiceProvider{
 
     function __construct()
     {
-        $url = $this->parseUrl();
+        $request = $this->handleRequest($_REQUEST);
+
         $routeHandler = new RouteHandler();
-        $routeHandler->handle($_REQUEST);
+        $routeHandler->loadRouteHandler($request);
         // if(empty($url[0])){
         //     $url[0]='index';
         //     $url[1]='view';
@@ -27,12 +28,12 @@ class RouteServiceProvider{
         // } 
     }
 
-    private function parseUrl(){
-        $url = $_GET['url'];
-        $url = rtrim($url,'/');
-        $url = explode('/', $url);
+    private function handleRequest($request){
+        if(!isSet($request['url'])){
+            $request['url'] = 'index';
+        }
 
-        return $url;
+        return $request;
     }
 
     

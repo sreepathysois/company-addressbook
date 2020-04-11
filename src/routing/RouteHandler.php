@@ -1,4 +1,5 @@
 <?php
+include_once 'models/BaseModel.php';
 
 class RouteHandler{
 
@@ -33,14 +34,19 @@ class RouteHandler{
     public function route(RouteHandler $entityRouter, Array $url, $method){
 
         $route = $entityRouter->getRoute($entityRouter, $url, $method);
-        $this->loadController($route, $_REQUEST);
+        $function = $route['function'];
+
+        $model = $this->loadModel($url);
+        $controller = $this->loadController($route, $model);
+        
+        $controller->{$function}($model, $_REQUEST);
     }
 
     public function getRoute(RouteHandler $entityRouter, $uri, $method){
         $routes = $entityRouter->getRoutes();
         
         $parameterisedUrl = $this->handleParameters($uri);
-        
+
         foreach($routes as $route){
             if($route['uri']==$parameterisedUrl && $route['method']==$method){
                 return $route;
@@ -48,21 +54,42 @@ class RouteHandler{
         }
     }
 
-    private function loadController(Array $route, $request){
+    private function loadController(Array $route){
         $controllerFile = $route['controller'].'.php';
         $controllerClass = $route['controller'];
-        $function = $route['function'];
         
         if(file_exists('controllers/'.$controllerFile)){
             require 'controllers/'.$controllerFile;
 
-            $controller = new $controllerClass;
-            $controller->{$function}($request);
+            return new $controllerClass;
+            
         }
         else{
             echo "it is $url[0]";
             throw new Exception('The file does not exist');
         }
+    }
+
+    private function loadModel(Array $url){
+        $id = $url[1];
+
+        if(isSet($id)){
+            $modelFile = ucFirst($url[0]).'Model.php';
+            $modelClass = ucFirst($url[0]).'Model';
+
+            if(file_exists('models/'.$modelFile)){
+                require 'models/'.$modelFile;
+    
+                //$model = $modelClass::Find($id);
+                $model = new $modelClass;
+            }
+            else{
+                echo "it is $url[0]";
+                throw new Exception('The file does not exist');
+            }
+        }
+
+        return $model;
     }
 
     private function handleParameters(Array $url){

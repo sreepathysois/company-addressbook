@@ -1,7 +1,7 @@
 <?php
    // Connect to database, and complain if it fails
    try {
-      $dbhandle = new PDO("mysql:host=db;dbname=database", "user", "password");
+      $DB = new PDO("mysql:host=db;dbname=database", "user", "password");
    }
    catch (PDOException $e) {
       // The PDO constructor throws an exception if it fails

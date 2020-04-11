@@ -3,7 +3,7 @@
 --
 
 CREATE TABLE `organisations` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -12,7 +12,7 @@ CREATE TABLE `organisations` (
 -- Dumping data for table `organisations`
 --
 
-INSERT INTO `organisations` (`ID`, `name`, `email`) VALUES
+INSERT INTO `organisations` (`id`, `name`, `email`) VALUES
 (1, 'Bloomberg', 'blbrg@bloomberg.net'),
 (2, 'Google', 'ggl@gmail.com'),
 (3, 'Amazon', 'amazon@gmail.com'),
@@ -26,7 +26,7 @@ INSERT INTO `organisations` (`ID`, `name`, `email`) VALUES
 --
 
 CREATE TABLE `people` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `phone` text NOT NULL,
   `organisation` varchar(100) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `people` (
 -- Dumping data for table `people`
 --
 
-INSERT INTO `people` (`ID`, `name`, `phone`, `organisation`, `organisationid`) VALUES
+INSERT INTO `people` (`id`, `name`, `phone`, `organisation`, `organisation_id`) VALUES
 (2, 'Lamar Wolfe', '012449420', 'AMD', 4),
 (3, 'Fadel Gaber', '07555188', 'Heaven', 1),
 (4, 'Brian Mcpherson', '055 3322 4467', 'Google', 2),
@@ -53,27 +53,27 @@ INSERT INTO `people` (`ID`, `name`, `phone`, `organisation`, `organisationid`) V
 -- Indexes for table `organisations`
 --
 ALTER TABLE `organisations`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `name` (`name`);
 
 --
 -- Indexes for table `people`
 --
 ALTER TABLE `people`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `organisationid` (`organisationid`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `organisationid` (`organisation_id`),
   ADD KEY `organisation` (`organisation`);
 
 --
 -- AUTO_INCREMENT for table `organisations`
 --
 ALTER TABLE `organisations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 
 --
@@ -81,5 +81,5 @@ ALTER TABLE `people`
 --
 ALTER TABLE `people`
   ADD CONSTRAINT `people_ibfk_2` FOREIGN KEY (`organisation`) REFERENCES `organisations` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `people_ibfk_1` FOREIGN KEY (`organisationid`) REFERENCES `organisations` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `people_ibfk_1` FOREIGN KEY (`organisation_id`) REFERENCES `organisations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

@@ -1,18 +1,18 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <?php
-include('conn.php');
+include('DatabaseConnection.php');
 //SQL query is here
 $sql   = "Select *
           From people";
 $sql2  = "Select * From organisations";
-$query = $dbhandle->prepare($sql);
+$query = $DB->prepare($sql);
 
 if ($query->execute() === FALSE) {
     die('Error Running Query: ' . implode($query->errorInfo(), ' '));
 }
 
 $result = $query->fetchAll();
-$query2 = $dbhandle->prepare($sql2);
+$query2 = $DB->prepare($sql2);
 $query2->execute();
 $orglist = $query2->fetchAll();
 //Table generation starts below
@@ -26,12 +26,12 @@ $orglist = $query2->fetchAll();
 <?php
 foreach ($result as $row) {
     echo "<tr>";
-    echo "<td>" . $row['ID'] . "</td>";
+    echo "<td>" . $row['id'] . "</td>";
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . $row['phone'] . "</td>";
     echo "<td>" . $row['organisation'] . "</td>";
-    echo "<td>" . "<a href='editpeople.php?id=" . $row['ID'] . "'>" . "Edit" . "</a>" . "</td>";
-    echo "<td>" . "<a href='deletepeople.php?id=" . $row['ID'] . "'>" . "Delete" . "</a>" . "</td>";
+    echo "<td>" . "<a href='editpeople.php?id=" . $row['id'] . "'>" . "Edit" . "</a>" . "</td>";
+    echo "<td>" . "<a href='deletepeople.php?id=" . $row['id'] . "'>" . "Delete" . "</a>" . "</td>";
     echo "</tr>";
 }
 ?>

@@ -1,15 +1,14 @@
 <?php
 class PeopleModel extends BaseModel{
-    public $data;
-
+    protected $table = 'people';
+    protected $fields = []
     function __construct()
     {
         $this->data = 'testData';    
     }
 
     public function Find($id){
-        echo 'found';
-        echo $id;
+        echo $this->table;
     }
 }
 

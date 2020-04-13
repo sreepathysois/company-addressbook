@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-include('conn.php');
+include('DatabaseConnection.php');
 //Parametarised query to prevent SQL injection    
 $params = array(
     ":i" => $id);
@@ -8,7 +8,7 @@ $sql    = "Delete
           From people 
           Where id=:i";
 
-$query = $dbhandle->prepare($sql);
+$query = $DB->prepare($sql);
 $query->execute($params);
 
 

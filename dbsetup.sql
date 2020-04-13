@@ -8,18 +8,6 @@ CREATE TABLE `organisations` (
   `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `organisations`
---
-
-INSERT INTO `organisations` (`id`, `name`, `email`) VALUES
-(1, 'Bloomberg', 'blbrg@bloomberg.net'),
-(2, 'Google', 'ggl@gmail.com'),
-(3, 'Amazon', 'amazon@gmail.com'),
-(4, 'AMD', 'amd@amd.com'),
-(5, 'Intel', 'intel@intel.com');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `people`
@@ -30,24 +18,8 @@ CREATE TABLE `people` (
   `name` text NOT NULL,
   `phone` text NOT NULL,
   `organisation` varchar(100) NOT NULL,
-  `organisationid` int(11) NOT NULL
+  `organisation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `people`
---
-
-INSERT INTO `people` (`id`, `name`, `phone`, `organisation`, `organisation_id`) VALUES
-(2, 'Lamar Wolfe', '012449420', 'AMD', 4),
-(3, 'Fadel Gaber', '07555188', 'Heaven', 1),
-(4, 'Brian Mcpherson', '055 3322 4467', 'Google', 2),
-(5, 'Drew Conner', '0801 652 2441', 'Amazon', 3),
-(6, 'Austin Dickerson', '055 4990 9805', 'Intel', 5),
-(7, 'Camden Mason', '07995 803810', 'Intel', 5),
-(8, 'Ivor Goff', '055 3921 9696', 'Bloomberg', 1),
-(9, 'Gannon Jacobson', '(01953) 71229', 'Bloomberg', 1),
-(12, 'Connor Sharpe', '123456878', 'Bloomberg', 1),
-(16, 'Jeremy Jones', '213321321', 'Amazon', 3);
 
 --
 -- Indexes for table `organisations`
@@ -61,7 +33,7 @@ ALTER TABLE `organisations`
 --
 ALTER TABLE `people`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `organisationid` (`organisation_id`),
+  ADD KEY `organisation_id` (`organisation_id`),
   ADD KEY `organisation` (`organisation`);
 
 --
@@ -83,3 +55,32 @@ ALTER TABLE `people`
   ADD CONSTRAINT `people_ibfk_2` FOREIGN KEY (`organisation`) REFERENCES `organisations` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `people_ibfk_1` FOREIGN KEY (`organisation_id`) REFERENCES `organisations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+--
+-- Dumping data for table `organisations`
+--
+
+INSERT INTO `organisations` (`id`, `name`, `email`) VALUES
+(1, 'Bloomberg', 'blbrg@bloomberg.net'),
+(2, 'Google', 'ggl@gmail.com'),
+(3, 'Amazon', 'amazon@gmail.com'),
+(4, 'AMD', 'amd@amd.com'),
+(5, 'Intel', 'intel@intel.com');
+
+-- --------------------------------------------------------
+
+
+--
+-- Dumping data for table `people`
+--
+
+INSERT INTO `people` (`id`, `name`, `phone`, `organisation`, `organisation_id`) VALUES
+(2, 'Lamar Wolfe', '012449420', 'AMD', 4),
+(4, 'Brian Mcpherson', '055 3322 4467', 'Google', 2),
+(5, 'Drew Conner', '0801 652 2441', 'Amazon', 3),
+(6, 'Austin Dickerson', '055 4990 9805', 'Intel', 5),
+(7, 'Camden Mason', '07995 803810', 'Intel', 5),
+(8, 'Ivor Goff', '055 3921 9696', 'Bloomberg', 1),
+(9, 'Gannon Jacobson', '(01953) 71229', 'Bloomberg', 1),
+(12, 'Connor Sharpe', '123456878', 'Bloomberg', 1),
+(16, 'Jeremy Jones', '213321321', 'Amazon', 3);
+

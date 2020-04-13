@@ -2,12 +2,12 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <?php
-include('conn.php');
+include('DatabaseConnection.php');
 //SQL query is here
 $sql   = "Select *
                   From organisations
                   ";
-$query = $dbhandle->prepare($sql);
+$query = $DB->prepare($sql);
 
 if ($query->execute() === FALSE) {
     die('Error Running Query: ' . implode($query->errorInfo(), ' '));
@@ -29,8 +29,8 @@ foreach ($result as $row) {
     echo "<td>" . $row['ID'] . "</td>";
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . "<a href='mailto:" . $row['email'] . "'>" . $row['email'] . "</a>" . "</td>";
-    echo "<td>" . "<a href='editorg.php?id=" . $row['ID'] . "'>" . "Edit" . "</a>" . "</td>";
-    echo "<td>" . "<a href='deleteorg.php?id=" . $row['ID'] . "'>" . "Delete" . "</a>" . "</td>";
+    echo "<td>" . "<a href='editorg.php?id=" . $row['id'] . "'>" . "Edit" . "</a>" . "</td>";
+    echo "<td>" . "<a href='deleteorg.php?id=" . $row['id'] . "'>" . "Delete" . "</a>" . "</td>";
     echo "</tr>";
 }
 ?>

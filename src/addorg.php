@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('DatabseConnection.php');
 $name   = $_POST['name'];
 $email  = $_POST['email'];
 //Parametarised query to prevent SQL injection    
@@ -9,7 +9,7 @@ $params = array(
 );
 $sql    = " Insert into organisations(name,email)
            Values (:n,:e)";
-$query  = $dbhandle->prepare($sql);
+$query  = $DB->prepare($sql);
 $query->execute($params);
 header('location:organisations.php');
 ?>    

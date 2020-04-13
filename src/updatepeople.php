@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('DatabaseConnection.php');
 $id     = $_GET['id'];
 $name   = $_POST['name'];
 $phone  = $_POST['phone'];
@@ -14,7 +14,7 @@ $params = array(
 $sql    = " Update people
            Set name=:n, phone=:p, organisation=(Select name from organisations name where id=:o)
            Where id=:i";
-$query  = $dbhandle->prepare($sql);
+$query  = $DB->prepare($sql);
 $query->execute($params);
 
 if ($query->execute($params) === FALSE) {

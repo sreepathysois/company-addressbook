@@ -1,11 +1,11 @@
 <?php
-include('conn.php');
+include('DatabaseConnection.php');
 $id  = $_GET['id'];
 $sql = "Select *
         From organisations
-        Where ID=$id";
+        Where id=$id";
 
-$query = $dbhandle->prepare($sql);
+$query = $DB->prepare($sql);
 
 if ($query->execute() === FALSE) {
     die('Error Running Query: ' . implode($query->errorInfo(), ' '));

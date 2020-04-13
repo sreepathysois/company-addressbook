@@ -1,12 +1,12 @@
 <?php
-	include('conn.php');
+	include('DatabaseConnection.php');
 	$id=$_GET['id'];
 	$sql="Select *
         From people
         Where ID=$id";
 	$sql2= "Select * From organisations";
-	$query = $dbhandle->prepare($sql);
-	$query2= $dbhandle->prepare($sql2);
+	$query = $DB->prepare($sql);
+	$query2= $DB->prepare($sql2);
 	$query2->execute();
 	$orglist= $query2->fetchAll();
 

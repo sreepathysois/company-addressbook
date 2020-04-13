@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('DatabseConnection.php');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo 'You are authorized';
@@ -17,7 +17,7 @@ $params = array(
 );
 $sql    = " Insert into people(name,phone,organisationid,organisation)
            Values (:n,:p,:o,(Select name from organisations where id=:o))";
-$query  = $dbhandle->prepare($sql);
+$query  = $DB->prepare($sql);
 $query->execute($params);
 header('location:people.php');
 ?>    

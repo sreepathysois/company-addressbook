@@ -82,7 +82,8 @@ class RouteHandler{
     
                 //$model = $modelClass::Find($id);
                 $model = new $modelClass;
-                $model->get();
+                $model->get(2);
+                //echo $model->organisation;
             }
             else{
                 echo "it is $url[0]";

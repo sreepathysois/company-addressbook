@@ -1,10 +1,16 @@
 <?php
 class PeopleModel extends BaseModel{
     protected $table = 'people';
-    protected $fields = []
+    protected $columns = [
+        'name',
+        'phone',
+        'organisation',
+        'organisation_id'
+    ];
+
     function __construct()
     {
-        $this->data = 'testData';    
+        parent::__construct();  
     }
 
     public function Find($id){

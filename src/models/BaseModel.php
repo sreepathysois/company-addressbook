@@ -16,19 +16,23 @@ class BaseModel{
     public function create(Array $values){
         $i = 0;
         foreach($this->columns as $field){
-            $this->$field = $values[$i];
+            $this->$field = $values[$field];
             $i++;
         }
-        $this->save($values);
     }
 
-    public function save(Array $values){
-         $columns = $this->commaSeparate($this->columns, "`");
-         $finalValues = $this->commaSeparate($values, "'");
-         $table = $this->commaSeparate($this->table, "`");
+    public function save(){
+        foreach($this->columns as $field){
+            $values[] = $this->$field;
+        }
+
+        $columns = $this->commaSeparate($this->columns, "`");
+        $finalValues = $this->commaSeparate($values, "'");
+        $table = $this->commaSeparate($this->table, "`");
 
         $query = "INSERT INTO $table ($columns) VALUES ($finalValues)";
         $this->db->query($query);
+        $this->setModelId();
     } 
 
     public function get($id){
@@ -39,12 +43,28 @@ class BaseModel{
         return $result;        
     }
 
-    public function update(){
-        
+    public function update(Array $values){
+        $table = $this->commaSeparate($this->table, "`");
+        $query = "UPDATE $table SET ";
+
+        foreach($values as $key=>$value) {
+            $query .= $key . " = " . "'".$value."'" . ", "; 
+        }
+
+        $query = trim($query, ' ');
+        $query = trim($query, ',');
+        $query .= " WHERE id = $this->id";
+        $query .= ";";
+
+        $this->db->query($query);
     }
 
     public function delete(){
+        $table = $this->commaSeparate($this->table, "`");
 
+        $query = "DELETE from $table WHERE id = $this->id";
+
+        $this->db->query($query);
     }
 
     private function commaSeparate($input, $delimeter){
@@ -59,5 +79,9 @@ class BaseModel{
         }
 
         return $output;
+    }
+
+    private function setModelId(){
+        $this->id = $this->db->lastInsertId();
     }
 }

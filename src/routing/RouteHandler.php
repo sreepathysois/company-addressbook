@@ -82,8 +82,9 @@ class RouteHandler{
     
                 //$model = $modelClass::Find($id);
                 $model = new $modelClass;
-                $model->get(2);
-                //echo $model->organisation;
+                $model->create(['name'=>'Fadel', 'phone'=>'02', 'organisation'=> 'Google','organisation_id'=>'2']);
+                $model->save();
+                $model->delete();
             }
             else{
                 echo "it is $url[0]";

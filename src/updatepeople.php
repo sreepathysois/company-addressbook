@@ -1,5 +1,5 @@
 <?php
-include('DatabaseConnection.php');
+include('database/DatabaseConnection.php');
 $id     = $_GET['id'];
 $name   = $_POST['name'];
 $phone  = $_POST['phone'];

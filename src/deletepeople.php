@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-include('DatabaseConnection.php');
+include('database/DatabaseConnection.php');
 //Parametarised query to prevent SQL injection    
 $params = array(
     ":i" => $id);

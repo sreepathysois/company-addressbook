@@ -12,10 +12,6 @@ class PeopleModel extends BaseModel{
     {
         parent::__construct();  
     }
-
-    public function Find($id){
-        echo $this->table;
-    }
 }
 
 ?>

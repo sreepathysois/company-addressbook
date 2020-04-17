@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <?php
-include('DatabaseConnection.php');
+include('database/DatabaseConnection.php');
 //SQL query is here
 $sql   = "Select *
                   From organisations

@@ -73,23 +73,24 @@ class RouteHandler{
     private function loadModel(Array $url){
         $id = $url[1];
 
-        if(isSet($id)){
-            $modelFile = ucFirst($url[0]).'Model.php';
-            $modelClass = ucFirst($url[0]).'Model';
+        $model = null;
+        $modelName = ucFirst($url[0]);
+        $modelFile = $modelName.'Model.php';
+        $modelClass = $modelName.'Model';
 
-            if(file_exists('models/'.$modelFile)){
-                require 'models/'.$modelFile;
-    
-                //$model = $modelClass::Find($id);
-                $model = new $modelClass;
-                $model->create(['name'=>'Fadel', 'phone'=>'02', 'organisation'=> 'Google','organisation_id'=>'2']);
-                $model->save();
-                $model->delete();
+        if($modelName == 'Index') return $model;
+        
+        if(file_exists('models/'.$modelFile)){
+            require 'models/'.$modelFile;
+
+            $model = new $modelClass;
+            if(isSet($id)){
+                $model->find($id);
             }
-            else{
-                echo "it is $url[0]";
-                throw new Exception('The file does not exist');
-            }
+        }
+        else{
+            echo "it is $url[0]";
+            throw new Exception('The file does not exist');
         }
 
         return $model;

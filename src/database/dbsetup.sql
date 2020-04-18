@@ -1,6 +1,7 @@
 --
 -- Table structure for table `organisations`
 --
+USE database;
 
 CREATE TABLE `organisations` (
   `id` int(11) NOT NULL,

@@ -25,6 +25,7 @@ class BaseModel extends Database{
 
         if($result){
             $this->create($result[0]);
+            $this->setModelId();
         }
         else{
             throw new Exception('Model with this ID is not found');

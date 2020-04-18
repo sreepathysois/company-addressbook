@@ -11,7 +11,7 @@ table, th, td {
 <h3><center>Select an option to view</center></h3>
 <table>
   <tr>
-    <td><a href="people.php">People</a></td>
+    <td><a href="people">People</a></td>
     <td><a href="organisations.php">Organisations</a></td>
   </tr>
 </table>

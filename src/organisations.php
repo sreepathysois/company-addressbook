@@ -26,7 +26,7 @@ $result = $query->fetchAll();
 <?php
 foreach ($result as $row) {
     echo "<tr>";
-    echo "<td>" . $row['ID'] . "</td>";
+    echo "<td>" . $row['id'] . "</td>";
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . "<a href='mailto:" . $row['email'] . "'>" . $row['email'] . "</a>" . "</td>";
     echo "<td>" . "<a href='editorg.php?id=" . $row['id'] . "'>" . "Edit" . "</a>" . "</td>";

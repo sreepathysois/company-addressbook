@@ -5,7 +5,6 @@ class CompanyRouter extends RouteHandler{
 
     function __construct(){
         $this->add('GET', 'company', 'CompanyController', 'index');
-        $this->add('GET', 'people/{id}', 'PeopleController', 'show');
     }
 }
 

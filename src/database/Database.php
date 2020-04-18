@@ -58,8 +58,8 @@ class Database{
     public function delete(){
         $table = $this->commaSeparate($this->table, "`");
 
-        $query = "DELETE from $table WHERE id = $this->id";
-
+        $query = "DELETE from $table WHERE id = $this->id;";
+        echo $query;
         $this->db->query($query);
     }
     private function commaSeparate($input, $delimeter){
@@ -76,7 +76,7 @@ class Database{
         return $output;
     }
 
-    private function setModelId(){
+    public function setModelId(){
         $this->id = $this->db->lastInsertId();
     }
 }

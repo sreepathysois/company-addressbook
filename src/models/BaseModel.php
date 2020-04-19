@@ -15,6 +15,7 @@ class BaseModel extends Database{
     public function create(Array $values){
         $i = 0;
         foreach($this->columns as $field){
+
             $this->$field = $values[$field];
             $i++;
         }
@@ -24,11 +25,15 @@ class BaseModel extends Database{
         $result = $this->get($id);
 
         if($result){
-            $this->create($result[0]);
-            $this->setModelId();
+            $this->create($result);
+            $this->setModelId($result);
         }
         else{
             throw new Exception('Model with this ID is not found');
         }
+    }
+
+    private function setModelId(Array $result){
+        $this->id = $result['id'];
     }
 }

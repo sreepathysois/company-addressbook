@@ -12,9 +12,8 @@ foreach ($people as $row) {
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . $row['phone'] . "</td>";
     echo "<td>" . $row['organisation'] . "</td>";
-    echo "<td>" . "<a href='editpeople.php?id=" . $row['id'] . "'>" . "Edit" . "</a>" . "</td>";
+    echo "<td>" . "<a href='people/" . $row['id'] . "'>" . "Edit" . "</a>" . "</td>";
     echo "<td>" . "<form action='people/".$row['id']."' method='POST'>
-                  <button type='submit' formmethod='POST' formaction='people/".$row['id']."'"."Submit</button>
                   <input type='submit' value='Delete' />
                   </form>" . "</td>";
     echo "</tr>";
@@ -28,7 +27,7 @@ foreach ($people as $row) {
       <th>Add new </th>
    </tr>
    <tr>
-      <form method="GET" action="/people/test/test">
+      <form method="POST" action="/people">
          <td><label>Name:</label><input type="text" name="name" required></td>
    </tr>
    <tr>
@@ -36,10 +35,10 @@ foreach ($people as $row) {
    </tr>
    <tr>
    <td><label>Organisation:
-   <Select name="org">
+   <Select name="organisation">
    <?php
       foreach ($companies as $row) {
-      echo "<option value='" . $row['ID'] . "'>" . $row['name'];
+      echo "<option value='".$row['id']."|".$row['name']. "'>" . $row['name'];
 	  }
       ?>
    </Select></td>

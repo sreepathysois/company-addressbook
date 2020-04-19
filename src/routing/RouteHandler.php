@@ -23,7 +23,14 @@ class RouteHandler{
             require 'routing/'.$router;
             $entityRouter = new $routerClass();
 
-            $this->route($entityRouter, $url, $_SERVER['REQUEST_METHOD']);
+            if(isSet($request['_method'])){
+                $requestMethod = $request['_method'];
+            }
+            else{
+                $requestMethod = $_SERVER['REQUEST_METHOD'];
+            }
+            
+            $this->route($entityRouter, $url, $requestMethod);
         }
         else{
             echo "it is $url[0]";
@@ -38,7 +45,7 @@ class RouteHandler{
 
         $model = $this->loadModel($url);
         $controller = $this->loadController($route, $model);
-        
+
         $controller->{$function}($model, $_REQUEST);
     }
 
@@ -72,14 +79,14 @@ class RouteHandler{
 
     private function loadModel(Array $url){
         $id = $url[1];
-
+        
         $model = null;
         $modelName = ucFirst($url[0]);
         $modelFile = $modelName.'Model.php';
         $modelClass = $modelName.'Model';
 
         if($modelName == 'Index') return $model;
-        
+
         if(file_exists('models/'.$modelFile)){
             require 'models/'.$modelFile;
 

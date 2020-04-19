@@ -13,13 +13,45 @@ class PeopleController extends BaseController{
         $this->view->render('PeopleView', ['people' => $people, 'companies' => $companies]);
     }
 
-    public function show(PeopleModel $model=null, $request){
-        echo $model->data;
+    public function create(PeopleModel $model, $request){
+        $organisation = explode('|', $request['organisation']);
+
+        $model->create(['name' => $request['name'],
+                        'phone' => $request['phone'],
+                        'organisation' => $organisation[1],
+                        'organisation_id' => $organisation[0]]);
+        $model->save();
+
+        $this->refresh();
+    }
+
+    public function update(PeopleModel $model, $request){
+        $organisation = explode('|', $request['organisation']);
+
+        $model->update(['name' => $request['name'],
+                        'phone' => $request['phone'],
+                        'organisation' => $organisation[1],
+                        'organisation_id' => $organisation[0]]);
+
+        $this->refresh();
+    }
+
+    public function editView(PeopleModel $model=null, $request){
+
+        $companiesModel = new CompanyModel();
+        $companies = $companiesModel->getAll();
+
+        $this->view->render('EditPeopleView', ['id' => $model->id, 'name' => $model->name, 'phone' => $model->phone, 'companies' => $companies]);
     }
 
     public function delete(PeopleModel $model, $request){
         $model->delete();
-        echo 'reached';
-        //header('location:people');
+
+        $this->refresh();
+    }
+
+    private function refresh(){
+        header("Location: /people");
+        die();
     }
 }

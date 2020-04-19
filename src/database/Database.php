@@ -13,7 +13,7 @@ class Database{
         foreach($this->columns as $field){
             $values[] = $this->$field;
         }
-
+        
         $columns = $this->commaSeparate($this->columns, "`");
         $finalValues = $this->commaSeparate($values, "'");
         $table = $this->commaSeparate($this->table, "`");
@@ -26,7 +26,7 @@ class Database{
     public function get($id){
         $table = $this->commaSeparate($this->table, "`");
         $query = "Select * From $table Where id = $id";
-        $result = $this->db->query($query)->fetchAll();
+        $result = $this->db->query($query)->fetch();
         
         return $result;        
     }
@@ -59,9 +59,10 @@ class Database{
         $table = $this->commaSeparate($this->table, "`");
 
         $query = "DELETE from $table WHERE id = $this->id;";
-        echo $query;
+
         $this->db->query($query);
     }
+
     private function commaSeparate($input, $delimeter){
         $output = "";
 
@@ -76,7 +77,7 @@ class Database{
         return $output;
     }
 
-    public function setModelId(){
+    private function setModelId(){
         $this->id = $this->db->lastInsertId();
     }
 }

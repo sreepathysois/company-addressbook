@@ -14,109 +14,14 @@ class Router{
         ];
     }
 
-    public function loadRouteHandler($request){
-        $url = $this->parseUrl($request['url']);
-        $router = ucFirst($url[0]).'Router.php';
-        $routerClass = ucFirst($url[0]).'Router';
-
-        if(file_exists('routing/'.$router)){
-            require 'routing/'.$router;
-            $entityRouter = new $routerClass();
-
-            if(isSet($request['_method'])){
-                $requestMethod = $request['_method'];
-            }
-            else{
-                $requestMethod = $_SERVER['REQUEST_METHOD'];
-            }
-            
-            $this->route($entityRouter, $url, $requestMethod);
-        }
-        else{
-            throw new Exception('The file does not exist');
-        }
-    }
-
-    public function route(Router $entityRouter, Array $url, $method){
-
-        $route = $entityRouter->getRoute($entityRouter, $url, $method);
-        $function = $route['function'];
-
-        $model = $this->loadModel($url);
-        $controller = $this->loadController($route);
-
-        $controller->{$function}($model, $_REQUEST);
-    }
-
-    public function getRoute(Router $entityRouter, $uri, $method){
-        $routes = $entityRouter->getRoutes();
+    public function getRoute($uri, $method){
+        $routes = $this->getRoutes();
         
-        $parameterisedUrl = $this->handleParameters($uri);
-
         foreach($routes as $route){
-            if($route['uri']==$parameterisedUrl && $route['method']==$method){
+            if($route['uri']==$uri && $route['method']==$method){
                 return $route;
             }
         }
-    }
-
-    private function loadController(Array $route){
-        $controllerFile = $route['controller'].'.php';
-        $controllerClass = $route['controller'];
-        
-        if(file_exists('controllers/'.$controllerFile)){
-            require 'controllers/'.$controllerFile;
-
-            return new $controllerClass;
-            
-        }
-        else{
-            echo "it is $url[0]";
-            throw new Exception('The file does not exist');
-        }
-    }
-
-    private function loadModel(Array $url){
-        $id = $url[1];
-        
-        $model = null;
-        $modelName = ucFirst($url[0]);
-        $modelFile = $modelName.'Model.php';
-        $modelClass = $modelName.'Model';
-
-        if($modelName == 'Index') return $model;
-
-        if(file_exists('models/'.$modelFile)){
-            require 'models/'.$modelFile;
-
-            $model = new $modelClass;
-            if(isSet($id)){
-                $model->find($id);
-            }
-        }
-        else{
-            echo "it is $url[0]";
-            throw new Exception('The file does not exist');
-        }
-
-        return $model;
-    }
-
-    private function handleParameters(Array $url){
-        for($i=0; $i<count($url); $i++){
-            if(is_numeric($url[$i])){
-                $url[$i] = "{id}";
-            }
-        }
-
-        return implode("/",$url);
-    }
-
-    public function parseUrl($url){
-        $url = rtrim($url,'/');
-        $url = explode('/', $url);
-
-        return $url;
     }
 
     public function getRoutes(){

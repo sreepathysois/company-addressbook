@@ -8,7 +8,7 @@ class PeopleRouter extends Router{
         $this->add('GET', 'people/{id}', 'PeopleController', 'editView');
         $this->add('POST', 'people', 'PeopleController', 'create');
         $this->add('PATCH', 'people/{id}', 'PeopleController', 'update');
-        $this->add('DELETE', 'people/{id}', 'PeopleController', 'delete');
+        $this->add('POST', 'people/{id}', 'PeopleController', 'delete');
     }
 }
 

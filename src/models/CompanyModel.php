@@ -1,6 +1,6 @@
 <?php
 class CompanyModel extends BaseModel{
-    protected $table = 'organisations';
+    protected $table = 'companies';
     protected $columns = [
         'name',
         'email'

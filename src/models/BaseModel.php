@@ -1,5 +1,4 @@
 <?php
-include_once "database/DatabaseConnection.php";
 include_once "database/Database.php";
 
 class BaseModel extends Database{

@@ -5,8 +5,8 @@
         <input name="_method" type="hidden" value="PATCH">
 		<label>Name:</label><input type="text" value=<?php echo '"'.$name.'"';?> name="name" required>
 		<label>Phone:</label><input type="text" value=<?php echo '"'.$phone.'"'; ?> name="phone" required>
-		<label>Organisation:</label>
-			<Select name="organisation">
+		<label>Company:</label>
+			<Select name="company">
 			<?php
 			foreach($companies as $row)
 			{
@@ -16,7 +16,7 @@
 
 			</Select>
 		<input type="submit" name="submit">
-		<a href="people.php">Back</a>
+		<a href="/people">Back</a>
 	</form>
 </body>
 </html>

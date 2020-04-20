@@ -4,8 +4,8 @@ class PeopleModel extends BaseModel{
     protected $columns = [
         'name',
         'phone',
-        'organisation',
-        'organisation_id'
+        'company',
+        'company_id'
     ];
 
     function __construct()

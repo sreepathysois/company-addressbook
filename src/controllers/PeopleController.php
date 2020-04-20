@@ -14,24 +14,24 @@ class PeopleController extends BaseController{
     }
 
     public function create(PeopleModel $model, $request){
-        $organisation = explode('|', $request['organisation']);
+        $company = explode('|', $request['company']);
 
         $model->create(['name' => $request['name'],
                         'phone' => $request['phone'],
-                        'organisation' => $organisation[1],
-                        'organisation_id' => $organisation[0]]);
+                        'company' => $company[1],
+                        'company_id' => $company[0]]);
         $model->save();
 
         $this->refresh();
     }
 
     public function update(PeopleModel $model, $request){
-        $organisation = explode('|', $request['organisation']);
+        $company = explode('|', $request['company']);
 
         $model->update(['name' => $request['name'],
                         'phone' => $request['phone'],
-                        'organisation' => $organisation[1],
-                        'organisation_id' => $organisation[0]]);
+                        'company' => $company[1],
+                        'company_id' => $company[0]]);
 
         $this->refresh();
     }

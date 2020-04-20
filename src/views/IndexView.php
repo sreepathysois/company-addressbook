@@ -12,7 +12,7 @@ table, th, td {
 <table>
   <tr>
     <td><a href="people">People</a></td>
-    <td><a href="organisations.php">Organisations</a></td>
+    <td><a href="company">Companies</a></td>
   </tr>
 </table>
 </html>

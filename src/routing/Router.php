@@ -1,7 +1,7 @@
 <?php
 include_once 'models/BaseModel.php';
 
-class RouteHandler{
+class Router{
 
     private $routes;
 
@@ -33,23 +33,22 @@ class RouteHandler{
             $this->route($entityRouter, $url, $requestMethod);
         }
         else{
-            echo "it is $url[0]";
             throw new Exception('The file does not exist');
         }
     }
 
-    public function route(RouteHandler $entityRouter, Array $url, $method){
+    public function route(Router $entityRouter, Array $url, $method){
 
         $route = $entityRouter->getRoute($entityRouter, $url, $method);
         $function = $route['function'];
 
         $model = $this->loadModel($url);
-        $controller = $this->loadController($route, $model);
+        $controller = $this->loadController($route);
 
         $controller->{$function}($model, $_REQUEST);
     }
 
-    public function getRoute(RouteHandler $entityRouter, $uri, $method){
+    public function getRoute(Router $entityRouter, $uri, $method){
         $routes = $entityRouter->getRoutes();
         
         $parameterisedUrl = $this->handleParameters($uri);

@@ -1,41 +1,22 @@
 <?php
-require_once 'routing/RouteHandler.php';
+require_once 'routing/Router.php';
 
 class RouteServiceProvider{
 
     function __construct()
     {
-        $request = $this->handleRequest($_REQUEST);
+        $request = $this->handleIndex($_REQUEST);
 
-        $routeHandler = new RouteHandler();
+        $routeHandler = new Router();
         $routeHandler->loadRouteHandler($request);
-        // if(empty($url[0])){
-        //     $url[0]='index';
-        //     $url[1]='view';
-        // }
-
-        // if(empty($url[1])){
-        //     $url[1]='view';
-        // }
-        // if($_SERVER['REQUEST_METHOD'] === 'GET') {
-        //     echo 'gettest';
-        //     print_r($_REQUEST);
-        // }
-        // $controller = $this->loadController($url);
-        
-        // if(isSet($url[1])){
-        //     $this->loadControllerFunction($url, $controller);
-        // } 
     }
 
-    private function handleRequest($request){
+    private function handleIndex($request){
         if(!isSet($request['url'])){
             $request['url'] = 'index';
         }
 
         return $request;
     }
-
-    
     
 }

@@ -1,5 +1,5 @@
 <?php
-require_once 'routing/Router.php';
+require_once 'routing/BaseRouter.php';
 
 class RouteServiceProvider{
 
@@ -28,7 +28,7 @@ class RouteServiceProvider{
         }
     }
 
-    public function route(Router $entityRouter, Array $url, $method){
+    public function route(BaseRouter $entityRouter, Array $url, $method){
 
         $route = $entityRouter->getRoute($this->handleParameters($url), $method);
         $function = $route['function'];

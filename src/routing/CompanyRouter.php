@@ -1,7 +1,7 @@
 <?php
-require_once 'Router.php';
+require_once 'BaseRouter.php';
 
-class CompanyRouter extends Router{
+class CompanyRouter extends BaseRouter{
 
     function __construct(){
         $this->add('GET', 'company', 'CompanyController', 'view');

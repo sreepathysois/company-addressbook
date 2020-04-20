@@ -1,7 +1,7 @@
 <?php
 include_once 'models/BaseModel.php';
 
-class Router{
+class BaseRouter{
 
     private $routes;
 
@@ -16,7 +16,7 @@ class Router{
 
     public function getRoute($uri, $method){
         $routes = $this->getRoutes();
-        
+
         foreach($routes as $route){
             if($route['uri']==$uri && $route['method']==$method){
                 return $route;

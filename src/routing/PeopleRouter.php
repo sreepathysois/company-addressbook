@@ -1,7 +1,7 @@
 <?php
-require_once 'Router.php';
+require_once 'BaseRouter.php';
 
-class PeopleRouter extends Router{
+class PeopleRouter extends BaseRouter{
 
     function __construct(){
         $this->add('GET', 'people', 'PeopleController', 'view');

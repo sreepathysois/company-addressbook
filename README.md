@@ -1,4 +1,5 @@
 # Summary
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
 
 This is a Dockerised PHP MySQL project built on a custom MVC framework that is used to implement a REST API. This allows users to create companies and assign employees to them. 
 

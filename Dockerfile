@@ -1,4 +1,4 @@
-FROM mysql:8.0
+FROM mysql:latest
 COPY src/database/dbsetup.sql /docker-entrypoint-initdb.d/
 FROM php:7.3-apache
 RUN  apt-get update && apt-get upgrade -y

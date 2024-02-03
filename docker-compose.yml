@@ -11,7 +11,9 @@ services:
             ports:
                 - 8000:80
         db:
-            image: mysql:8.0
+            build:
+                context: ./
+                dockerfile: Dockerfile_db
             volumes:
               - db_data:/var/lib/mysql
             container_name: mysql
